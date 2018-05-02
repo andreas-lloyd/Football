@@ -1,0 +1,16 @@
+- Log handling
+    ADD: Some more INFO level output to keep track of some processes
+    REASON: I think level is good but unclear from some logs what has been done
+
+- Path handling
+    REPLACE: Manual handling
+    REASON: Easier / more robust
+    IDEAS FOR PACKAGES: ... have to search a bit, shouldn't be hard
+
+- Only passing directories
+    REPLACE: Loading in full HTML
+    REASON: Will speed up if we only pass in directories, not full HTML texts
+
+- Optimising storage
+    LONG TERM: Do things in a chain and save as little as possible (i.e. pull HTML, analyse, etc.)
+    SHORT TERM: Could delete large parts of the HTML that are unused to maybe save aout 50% memory, at least - potentially cause fewer problems down the line too - REMOVE ALL HEAD??

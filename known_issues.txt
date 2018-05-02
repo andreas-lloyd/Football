@@ -1,0 +1,36 @@
+ISSUE 1:
+    Example:
+        Found the link
+        http://www.bbc.comhttp://bbc.co.uk/sport/football/42695334
+
+        vs.
+
+        http://www.bbc.com/sport/football/42463444
+
+    Problem:
+        We have tagged on bbc.com when it was not needed
+
+    Solution:
+        Well should also be eliminating the "." from the regex?
+
+        Or change to [^\/]         \/([^\/][^www].*)
+
+ISSUE 2:
+    Example:
+        Returned an HTML with forbidden that was part of suburls - on re-run it worked
+
+    Problem:
+        I think just getting rejected
+
+    Solution:
+        Need to add error handling somewhere to ignore the "forbidden"
+
+ISSUE 3:
+    Example:
+        Look at log file from 26 at the end - codec error
+
+    Problem:
+        I think pulling something with bad encoding
+
+    Solution:
+        Need to investigate
