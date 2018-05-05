@@ -13,7 +13,7 @@ from football_functions.source_specific.telegraph import process_html as telegra
 
 def process_articles(story_loc, html_loc, date_today, proxy, logger, domain_list = None):
     '''
-    Function to grab all of the articles and begin processing them
+    Function to grab all of the articles saved in pickles and start pulling the HTML found in the URL to get the story
     Note that since this process is so long - will do two loops 
     This is useful for if the internet drops temporarily
     '''
@@ -97,8 +97,8 @@ def get_story(story_path, domain, logger):
 
 def get_articles(story_loc, html_loc, date_today, logger, domain_list = None):
     '''
-    Function that will load in the pickle and then call the function to 
-    read the HTML and get the story text
+    Function that will load in the pickle, use the link to find where the HTML is found, and then pull 
+    the key features from the article page (like the actual article text)
     '''
     bad_links = []
 

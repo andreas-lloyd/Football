@@ -71,7 +71,7 @@ def extract_headlines(html_loc, story_loc, date_today, domain, logger):
 
 def process_html(html_loc, story_loc, date_today, logger, domain_list = None):
     '''
-    Function for processing the HTML we find and want to process for headlines
+    Function for just processes all base / sublinks and call the function to extract headlines
     '''
 
     if domain_list is None:
