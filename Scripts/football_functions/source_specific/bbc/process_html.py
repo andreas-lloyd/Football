@@ -16,7 +16,7 @@ def get_suburls(html_path, logger):
     
     return sel.xpath('//div[not(contains(@data-reactid, "group_0"))]/ul/li/a[@class = "gs-o-list-ui__link sp-c-group-index__link gel-pica-bold"]/@href').extract()
 
-def extract_headlines(html_content, modifier):
+def extract_headlines(html_loc, modifier, logger):
     '''
     Returns a dictionary with the key aspects of BBC headlines
     We have two types - the team pages and the confirmed transfers
@@ -24,6 +24,10 @@ def extract_headlines(html_content, modifier):
     Each article is separated into "article" blocks and the URLs are non-absolute with a numeric code
     Could potentially improve timing here as the loops might be excessive
     '''    
+    logger.debug('Loading the HTML...')
+    with open(html_loc, 'r', encoding = 'utf-8') as html_file:
+        html_content = html_file.read()
+    
     sel = pr.Selector(html_content)
     articles_info = {}
     
@@ -93,7 +97,7 @@ def get_text(story_path, logger):
     text, author, date, twitter, keywords
     '''
     logger.debug('Loading the HTML...')
-    with open(story_path, 'r') as story_file:
+    with open(story_path, 'r', encoding = 'utf-8') as story_file:
         html_content = story_file.read()
 
     sel = pr.Selector(html_content)

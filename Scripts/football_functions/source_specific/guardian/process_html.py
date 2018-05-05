@@ -16,10 +16,15 @@ def get_suburls(html_path, logger):
     
     return sel.xpath('//div[@class = "fc-item fc-item--list-compact"]/a/@href').extract()
 
-def extract_headlines(html_content):
+def extract_headlines(html_loc, logger):
     '''
     Extract headlines from HTML content from the Guardian team pages
     '''
+
+    logger.debug('Loading the HTML...')
+    with open(html_loc, 'r', encoding = 'utf-8') as html_file:
+        html_content = html_file.read()
+
     sel = pr.Selector(html_content)
     articles_info = {}
     
@@ -56,7 +61,7 @@ def get_text(story_path, logger):
     text, author, date, twitter, keywords
     '''
     logger.debug('Loading the HTML...')
-    with open(story_path, 'r') as story_file:
+    with open(story_path, 'r', encoding = 'utf-8') as story_file:
         html_content = story_file.read()
 
     sel = pr.Selector(html_content)

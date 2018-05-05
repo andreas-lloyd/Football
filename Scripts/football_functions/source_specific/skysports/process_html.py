@@ -5,11 +5,15 @@ Functions included
 '''
 import parsel as pr
 
-def extract_headlines(html_content, modifier):
+def extract_headlines(html_loc, modifier, logger):
     '''
     Extract headlines from Skysports pages
     The modifier points to regional articles or not
     '''
+    logger.debug('Loading the HTML...')
+    with open(html_loc, 'r', encoding = 'utf-8') as html_file:
+        html_content = html_file.read()
+
     sel = pr.Selector(html_content)
     articles_info = {}
     
@@ -82,7 +86,7 @@ def get_text(story_path, logger):
     text, author, date, twitter, keywords
     '''
     logger.debug('Loading the HTML...')
-    with open(story_path, 'r') as story_file:
+    with open(story_path, 'r', encoding = 'utf-8') as story_file:
         html_content = story_file.read()
 
     sel = pr.Selector(html_content)

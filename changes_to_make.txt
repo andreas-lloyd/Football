@@ -14,3 +14,21 @@
 - Optimising storage
     LONG TERM: Do things in a chain and save as little as possible (i.e. pull HTML, analyse, etc.)
     SHORT TERM: Could delete large parts of the HTML that are unused to maybe save aout 50% memory, at least - potentially cause fewer problems down the line too - REMOVE ALL HEAD??
+
+        with open(check_1, 'r') as file_1:
+        html_1 = file_1.read()
+            
+            # LETS DO A TEST TO SEE IF THIS IS WORTH IT AND WORKS THE SAME
+            if remove_filler:
+                html_1 = re.sub(r'<head>(?s).*</head>', '', html_1)
+                html_1 = re.sub(r'<script(?s).*?</script>', '', html_1)
+                html_1 = re.sub(r'<!--(?s).*?-->', '', html_1)
+    
+    with open(check_2, 'r') as file_2:
+        html_2 = file_2.read()
+            
+            # LETS DO A TEST TO SEE IF THIS IS WORTH IT AND WORKS THE SAME
+            if remove_filler:
+                html_2 = re.sub(r'<head>(?s).*</head>', '', html_2)
+                html_2 = re.sub(r'<script(?s).*?</script>', '', html_2)
+                html_2 = re.sub(r'<!--(?s).*?-->', '', html_2)

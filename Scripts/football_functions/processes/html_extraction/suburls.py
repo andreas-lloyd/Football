@@ -23,9 +23,9 @@ def extract_urls(html_loc, organ_loc, date_today, logger, domain_list = None):
 
         # We will then loop over all the HTML we find there to start pulling those URLs
         search_path = os.path.join(html_loc, domain, date_today, 'base_urls')
+        links = []
         for html_file in os.listdir(search_path):
             html_path = os.path.join(search_path, html_file)
-            links = []
             
             # Will only process certain URLsfor each domain
             if domain == 'bbc' and 'teams' in html_file:
@@ -40,25 +40,25 @@ def extract_urls(html_loc, organ_loc, date_today, logger, domain_list = None):
             if domain == 'theguardian'  and 'teams' in html_file:
                 links.extend(guardian.get_suburls(html_path, logger))
 
-            # If we have found some links then print them to file in organ_loc
-            if len(links) != 0:
-                logger.info('Have found {} links from {}'.format(len(links), domain))
-                sublinks_path = os.path.join(organ_loc, domain, date_today)
-                
-                # Check if exists
-                if not os.path.exists(sublinks_path):
-                    logger.info('Making directory {}'.format(sublinks_path))
-                    os.makedirs(sublinks_path)
-                
-                logger.info('Writing links file')
-                with open(os.path.join(sublinks_path, 'sublinks.txt'), 'w') as sublink_file:
-                    for link in links:
-                        sublink_file.write('{}\n'.format(link))
-                        
-                logger.info('Finished writing to file\n')
+        # If we have found some links then print them to file in organ_loc
+        if len(links) != 0:
+            logger.info('Have found {} links from {}'.format(len(links), domain))
+            sublinks_path = os.path.join(organ_loc, domain, date_today)
             
-            else:
-                logger.warning('Have found {} links from {}'.format(len(links), domain))
+            # Check if exists
+            if not os.path.exists(sublinks_path):
+                logger.info('Making directory {}'.format(sublinks_path))
+                os.makedirs(sublinks_path)
+            
+            logger.info('Writing links file')
+            with open(os.path.join(sublinks_path, 'sublinks.txt'), 'w') as sublink_file:
+                for link in links:
+                    sublink_file.write('{}\n'.format(link))
+                    
+            logger.info('Finished writing to file\n')
+        
+        else:
+            logger.warning('Have found {} links from {}'.format(len(links), domain))
 
 
 def scrape_urls(organ_loc, html_loc, date_today, proxy, logger):

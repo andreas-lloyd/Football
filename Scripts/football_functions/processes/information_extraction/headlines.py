@@ -25,32 +25,27 @@ def extract_headlines(html_loc, story_loc, date_today, domain, logger):
         logger.info('Making directory {}'.format(pickle_path))
         os.makedirs(pickle_path)
 
-    # Then load in the HTML content
-    logger.debug('Getting content from {}'.format(html_loc))
-    with open(html_loc, 'r', encoding = 'utf-8') as html_file:
-        html_content = html_file.read()
-
     # Now do source specific stuff
     if domain == 'bbc':
         modifier = 'football_teams' in html_loc
-        articles_info = bbc.extract_headlines(html_content, modifier)
+        articles_info = bbc.extract_headlines(html_loc, modifier, logger)
 
     elif domain == 'dailymail':
         modifier = 'football_index' not in html_loc
-        articles_info = dailymail.extract_headlines(html_content, modifier)
+        articles_info = dailymail.extract_headlines(html_loc, modifier, logger)
         
     elif domain == 'theguardian':
-        articles_info = guardian.extract_headlines(html_content)
+        articles_info = guardian.extract_headlines(html_loc, logger)
         
     elif domain == 'mirror':
-        articles_info = mirror.extract_headlines(html_content)
+        articles_info = mirror.extract_headlines(html_loc, logger)
     
     elif domain == 'skysports':
         modifier = 'regional' in html_loc
-        articles_info = skysports.extract_headlines(html_content, modifier)
+        articles_info = skysports.extract_headlines(html_loc, modifier, logger)
         
     elif domain == 'telegraph':
-        articles_info = telegraph.extract_headlines(html_content)
+        articles_info = telegraph.extract_headlines(html_loc, logger)
 
     logger.debug('Finished pulling articles - now saving article content')
 
