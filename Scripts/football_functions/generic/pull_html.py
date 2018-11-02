@@ -4,9 +4,10 @@ Generic functions for pulling HTML content - should be robust and handle errors,
 import requests, re, os, time, random
 
 def request_html(url, proxy, logger):
-    '''
-    Function to request from a URL and do some basic error handling
-    '''
+    """
+    Function that is fed a URL and then tries to pull from it, doing some error checking and handling proxies + sleeping
+    """
+    
     # Pull the HTML data from the URL using requests
     try:
         response = requests.get(url, proxies = proxy)
@@ -40,53 +41,13 @@ def request_html(url, proxy, logger):
             logger.error('Still not working')
             return (url, error)
 
-def get_html(url, html_loc, file_name, mode, domain_name, date_today, proxy, logger):
-    '''
-    Function to get the URL html and then save it to a directory
-    Inputs are the URL to scrape and the location of the "data" section of the file structure (expect .../Data/HTML)
-    The file_name is to give a specific name - default is for the base URLs that we search
-    The mode is for the file path and which type of link we are processing
-    The domain name can be given and it is saved specifically there - or it is not given and searched for in the URL
-    '''
-    # Pull HTML
-    html_text = request_html(url, proxy, logger)
-
-    # If we returned an error want to exit immediately
-    if html_text[1] != 'No error':
-        return html_text
-    
-    # Pull the source from the URL for the folder if the domain name is not provided
-    if domain_name is None:
-        domain_name = re.search('^.*www\.(.*?)\..*', url).group(1) # group looks for matches in ( )s
-    
-    # Define the file where we are going to save it - each URL should only be pulled once or overwritten
-    file_path = os.path.join(html_loc, domain_name, date_today, mode)
-    html_file =  os.path.join(file_path, file_name + '.html')
-    
-    logger.debug('Saving HTML from URL in \n{}'.format(html_file))
-    
-    # Check if path exists and if not create it
-    if not os.path.exists(file_path):
-        logger.debug('Making directory {}'.format(file_path))
-        os.makedirs(file_path)
-    
-    # Save the file
-    with open(html_file, 'w', encoding = 'utf-8') as f:
-        try:
-            f.write(html_text[0])
-        except:
-            logger.error('Unable to write URL to file')
-            return (url, 'file error')
-    
-    logger.debug('Successfully saved URL\n')
-    
-    return (url, 'No error')
-
-def process_url(url, html_loc, mode, date_today, proxy, logger, domain_name = None):
-    '''
-    A function to process a URL - have decided to work individually as can easily loop on a list
-    Takes the URL, location of /Data/, the mode and optionally the domain_name and proxy
-    '''
+def process_url(url, proxy, logger):
+    """
+    A function that is given a URL and then checks it over to see if worth scraping
+    If valid, will proceed to scrape - so all scraping goes here
+    Note that if we produce an error, will return the URL again
+    """
+    logger.info('Scraping URL {}'.format(url))
     
     # First check if the think we are scraping is valid and remove any spaces
     valid_url = re.match('^http\S*www\.\S*$', url)
@@ -95,9 +56,7 @@ def process_url(url, html_loc, mode, date_today, proxy, logger, domain_name = No
         # Always sleep a bit before requesting, just to stop us being rejected so much
         time.sleep(random.uniform(1, 2))
         
-        url_extension = re.search('\/([^\/][^www].*)', valid_url.group(0)).group(1).replace('/', '_')
-        file_name = re.sub('[^A-z0-9_]+', '', url_extension)
-        return get_html(valid_url.group(0).rstrip(), html_loc, file_name, mode, domain_name, date_today, proxy, logger)
+        return request_html(valid_url.group(0).rstrip(), proxy, logger)
     else:
         logger.warning('The link found is not valid\n {}\n'.format(url))
         return (url, 'Invalid URL')
