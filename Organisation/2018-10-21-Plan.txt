@@ -1,0 +1,26 @@
+Status:
+    - The full process seems complete, with a de-duplication part included
+    - Nothing is parallelised or anything like that, but I think that is a long way off
+    - Lacks testing and haven't updated anything for a long time
+
+Immediate to do:
+    - Test things out on a full run
+    - Check that de-duplication is working properly - especially for links that may not change name but update internally
+    - Make sure that the memory saving has worked well and is worth it for the loss
+    - Consider also getting the title from the story > when scraping gossip, we get titles that are just the names, but later the actual title is quite different
+    - Consider changing date schema to not include _s
+    - Check why had '_' instead of '/' in the modifier - probably because of how saved
+    - Tutorials on google cloud (computing and applications, databases, analytics and ML)
+
+Future to do:
+    - Check out servers and how will transfer over
+    - Set up script to work every day
+    - Options for saving to a data base and what would be the best path
+    - Once decided - start process of processing text data for injest - maybe should start injest immediately with the raw stories so that processing works from that
+    - Once completed - join the process of scraping and data processing + do look back processing
+    - Injest into database
+    - Parallelise tasks (in a basic way)
+
+Server notes:
+    - Would be nice to set up the SSH to work with private / public keys so that don't need to do much else
+    - Need to figure out if the database should be in a different place to where the core process runs

@@ -1,0 +1,13 @@
+﻿Development:
+    Was a good idea to separate "working" data and "development" data, as in production and developemtn type environments. That way
+    could easily test stuff quickly on reduced sets of data where understood what was going on.
+
+    Have to think about what information is being saved and in which order we are doing things - maybe it isnt useful or good to save all info,
+    and instead do the progress in a chain, deleting as we go along (keep things in memory but temporarily)
+
+    Probably would have been a bit smarter to build the full process once - with one source (more or less) and then add more later, just to be a bit more agile and 
+    flexible - because when got to really "detail specific", ended up losing focus and forgetting stuff because of volume of specific stuff
+
+Scripts:
+    Logging is pretty useful - where can keep "small" messages in DEBUG and then progress info at INFO levels - this way 
+    don't clutter the feed and slow everything down.
