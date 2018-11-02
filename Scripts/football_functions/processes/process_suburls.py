@@ -1,12 +1,12 @@
 """
 In this script we include the functions that work to find the suburls, then process the HTML contained within for headlines, and finally those stories
 """
-import football_functions.reduced.source_specific.bbc.process_html as bbc
-import football_functions.reduced.source_specific.dailymail.process_html as dailymail
-import football_functions.reduced.source_specific.mirror.process_html as mirror
-import football_functions.reduced.source_specific.guardian.process_html as guardian
-import football_functions.reduced.source_specific.skysports.process_html as skysports
-import football_functions.reduced.source_specific.telegraph.process_html as telegraph
+import football_functions.source_specific.bbc.process_html as bbc
+import football_functions.source_specific.dailymail.process_html as dailymail
+import football_functions.source_specific.mirror.process_html as mirror
+import football_functions.source_specific.guardian.process_html as guardian
+import football_functions.source_specific.skysports.process_html as skysports
+import football_functions.source_specific.telegraph.process_html as telegraph
 
 def find_suburls(baseurl_html, base_url, domain, logger):
     """

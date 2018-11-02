@@ -6,17 +6,16 @@ Functions included
 '''
 import parsel as pr
 
-def get_suburls(html_path, logger):
-    logger.debug('Processing the HTML found in \n{}'.format(html_path))
-    
-    with open(html_path, 'r', encoding = 'utf-8') as html_file:
-        html_content = html_file.read()
+def get_suburls(html_content, logger):
+    '''
+    Function that will get the suburls from the passed HTML
+    '''
     
     sel = pr.Selector(html_content)
     
     return sel.xpath('//div[not(contains(@data-reactid, "group_0"))]/ul/li/a[@class = "gs-o-list-ui__link sp-c-group-index__link gel-pica-bold"]/@href').extract()
 
-def extract_headlines(html_loc, modifier, logger):
+def extract_headlines(html_content, modifier, logger):
     '''
     Returns a dictionary with the key aspects of BBC headlines
     We have two types - the team pages and the confirmed transfers
@@ -24,9 +23,6 @@ def extract_headlines(html_loc, modifier, logger):
     Each article is separated into "article" blocks and the URLs are non-absolute with a numeric code
     Could potentially improve timing here as the loops might be excessive
     '''    
-    logger.debug('Loading the HTML...')
-    with open(html_loc, 'r', encoding = 'utf-8') as html_file:
-        html_content = html_file.read()
     
     sel = pr.Selector(html_content)
     articles_info = {}
@@ -90,15 +86,12 @@ def extract_headlines(html_loc, modifier, logger):
     
     return articles_info
 
-def get_text(story_path, logger):
+def get_text(html_content, logger):
     '''
     Function that will retrieve the story text from HTML
     NOTE that must do in order
     text, author, date, twitter, keywords
     '''
-    logger.debug('Loading the HTML...')
-    with open(story_path, 'r', encoding = 'utf-8') as story_file:
-        html_content = story_file.read()
 
     sel = pr.Selector(html_content)
 

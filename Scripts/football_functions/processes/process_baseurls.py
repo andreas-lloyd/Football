@@ -1,7 +1,7 @@
 """
 In this script we carry out thefull process for the baseurls, from getting the suburls and then finally saving the content in jsons
 """
-import re
+import re, json
 from football_functions.generic import pull_html as ph
 from football_functions.generic import check_duplicates as cd
 from football_functions.processes import process_suburls as ps

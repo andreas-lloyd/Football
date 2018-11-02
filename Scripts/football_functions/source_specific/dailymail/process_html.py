@@ -6,11 +6,7 @@ Functions included
 '''
 import parsel as pr
 
-def get_suburls(html_path, logger):
-    logger.debug('Processing the HTML found in \n{}'.format(html_path))
-    
-    with open(html_path, 'r', encoding = 'utf-8') as html_file:
-        html_content = html_file.read()
+def get_suburls(html_content, logger):
     
     sel = pr.Selector(html_content)
 
@@ -18,16 +14,12 @@ def get_suburls(html_path, logger):
     return ['http://www.dailymail.co.uk' + link for link in links]
 
 
-def extract_headlines(html_loc, modifier, logger):
+def extract_headlines(html_content, modifier, logger):
     '''
     Extract headlines from the HTML content of Dailymail articles
     Note that we have 3 URL types - 2x Base and sublinks
     The modifier points to the team pages
     '''
-
-    logger.debug('Loading the HTML...')
-    with open(html_loc, 'r', encoding = 'utf-8') as html_file:
-        html_content = html_file.read()
 
     sel = pr.Selector(html_content)
     articles_info = {}
@@ -74,15 +66,12 @@ def extract_headlines(html_loc, modifier, logger):
         
     return articles_info
 
-def get_text(story_path, logger):
+def get_text(html_content, logger):
     '''
     Function that will retrieve the story text from HTML
     NOTE that must do in order
     text, author, date, twitter, keywords
     '''
-    logger.debug('Loading the HTML...')
-    with open(story_path, 'r', encoding = 'utf-8') as story_file:
-        html_content = story_file.read()
 
     sel = pr.Selector(html_content)
 
