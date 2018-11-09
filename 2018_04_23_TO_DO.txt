@@ -1,5 +1,0 @@
-TO DO:
-- Finish lookback on work computer data
-- Maybe make a clean up script (this could be put off for now and instead save some of the HTML to zips and save on external hard drive)
-
-- START DATA ANALYSIS - script to pull all stories and save to CSV or something

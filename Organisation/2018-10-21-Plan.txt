@@ -1,15 +1,14 @@
 Status:
     - The full process seems complete, with a de-duplication part included
     - Nothing is parallelised or anything like that, but I think that is a long way off
-    - Lacks testing and haven't updated anything for a long time
 
 Immediate to do:
     - Test things out on a full run
     - Check that de-duplication is working properly - especially for links that may not change name but update internally
     - Make sure that the memory saving has worked well and is worth it for the loss
     - Consider also getting the title from the story > when scraping gossip, we get titles that are just the names, but later the actual title is quite different
-    - Consider changing date schema to not include _s
-    - Check why had '_' instead of '/' in the modifier - probably because of how saved
+    - Consider changing date schema to not include _s -> or save in folders where we go source > year > month > day
+        - DO THIS NOW, but have to rework the duplicates part, but should not be hard
     - Tutorials on google cloud (computing and applications, databases, analytics and ML)
 
 Future to do:
