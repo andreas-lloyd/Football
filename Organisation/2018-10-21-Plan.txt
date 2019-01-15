@@ -3,15 +3,30 @@ Status:
     - Nothing is parallelised or anything like that, but I think that is a long way off
 
 Immediate to do:
-    - Test things out on a full run
     - Check that de-duplication is working properly - especially for links that may not change name but update internally
-    - Make sure that the memory saving has worked well and is worth it for the loss
+        - Need to first identify the stories that do not change name, as I am not clear
+        - Need to make some system that can catch this automatically
+        - One way to get around duplicates would be to insert fake link and just not check for those > but then we will eventually start saving duplicates (that could be removed later I guess)
     - Consider also getting the title from the story > when scraping gossip, we get titles that are just the names, but later the actual title is quite different
-    - Consider changing date schema to not include _s -> or save in folders where we go source > year > month > day
-        - DO THIS NOW, but have to rework the duplicates part, but should not be hard
-    - Tutorials on google cloud (computing and applications, databases, analytics and ML)
+    - Add some print statements - and maybe a general report of what has happened
+        - We could add secondary script that runs apart from the main script to analyse the progress (i.e. by looking at the logs)
+    - Make into fully fledged package (will be better for gcloud)
+    - Make bash script for basic install of python stuff
+        - Update python ? + install pip3
+        - Install parsel
+    - Add some error handling for general purposes in the script so that it exits properly (e.g. keyboard interrupt) > is this needed?
+    - In the logs have found at least 1 URL that is being scraped when it is not > not sure if origin is formatting or what
+        - I think happened because tagged bbc.com on to something that was bbc.co.uk
+    - Fix the structure of the github so that can just pull everything easily
+    - Fix buckets so that can look at results from outside
+    - ISSUE:
+        - Have found that some team pages are not scraping because the domain name isn't saving (e.g. url = /sport/teams/barcelona)
+
+    FIX TO TEST:
+    - Need to alter in other scripts - but change the www: to if or http https
 
 Future to do:
+    - Re-think how feeding in baseurls, maybe there is a more flexible way and would be better for long term stability
     - Check out servers and how will transfer over
     - Set up script to work every day
     - Options for saving to a data base and what would be the best path
@@ -23,3 +38,16 @@ Future to do:
 Server notes:
     - Would be nice to set up the SSH to work with private / public keys so that don't need to do much else
     - Need to figure out if the database should be in a different place to where the core process runs
+
+2018-11-18 Report:
+- Memory saving worked really well - have saved only 20MB for more or less 2 days
+- Seems like de-duplication is working OK > still need to iron out those links that should be duplicated (probably by altering name)
+- 
+
+2018-12-08 Report:
+- Progressing OK - downloaded all logs
+
+TO DO:
+- Analyse logs for:
+    - Repeated deletions
+    - Errors in scraping (from issue)
