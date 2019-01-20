@@ -51,7 +51,7 @@ def extract_headlines(html_content, modifier, logger):
             article_summaries[i] = article_summaries[i].strip()
         
         # Add on to make full URL - note that sometimes it has different format
-        if 'www' not in article_links[i]:
+        if 'http://' not in article_links[i] and 'https://' not in article_links[i]:
             article_links[i] = 'http://www.dailymail.co.uk' + article_links[i]
         
         article_info = {

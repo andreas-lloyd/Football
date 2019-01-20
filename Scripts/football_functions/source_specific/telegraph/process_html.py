@@ -26,7 +26,7 @@ def extract_headlines(html_content, logger):
     for i, title in enumerate(article_titles):
         
         # Fix article links
-        if '://www' not in article_links[i]:
+        if 'http://' not in article_links[i] and 'https://' not in article_links[i]:
             article_links[i] = 'http://www.telegraph.co.uk' + article_links[i]
 
         article_info = {

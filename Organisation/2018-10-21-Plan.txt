@@ -7,28 +7,28 @@ Immediate to do:
         - Need to first identify the stories that do not change name, as I am not clear
         - Need to make some system that can catch this automatically
         - One way to get around duplicates would be to insert fake link and just not check for those > but then we will eventually start saving duplicates (that could be removed later I guess)
+
     - Consider also getting the title from the story > when scraping gossip, we get titles that are just the names, but later the actual title is quite different
-    - Add some print statements - and maybe a general report of what has happened
-        - We could add secondary script that runs apart from the main script to analyse the progress (i.e. by looking at the logs)
-    - Make into fully fledged package (will be better for gcloud)
-    - Make bash script for basic install of python stuff
-        - Update python ? + install pip3
-        - Install parsel
-    - Add some error handling for general purposes in the script so that it exits properly (e.g. keyboard interrupt) > is this needed?
-    - In the logs have found at least 1 URL that is being scraped when it is not > not sure if origin is formatting or what
-        - I think happened because tagged bbc.com on to something that was bbc.co.uk
-    - Fix the structure of the github so that can just pull everything easily
-    - Fix buckets so that can look at results from outside
+
+    - Something that looks at the logs and summarises the progress
+        - number of errors + printing uniques and counts + percentage of domain
+        - number of duplicates + percentage of domain
+
     - ISSUE:
         - Have found that some team pages are not scraping because the domain name isn't saving (e.g. url = /sport/teams/barcelona)
 
-    FIX TO TEST:
-    - Need to alter in other scripts - but change the www: to if or http https
+Medium term improvements:
+- Improve print statements to get some feedback on what is going on as running
+- Script that analyses the log and reports progress
+- Bash script for general install (including update python, pip3, parsel, chromjob and buckets)
+- Make more package like ? not sure if needed if just want to pull in the github - i guess could make the function part more like a function
+
+Data processing to do:
+- Need to start extracting key terms
+- Then set up pipeline for identifying which stories are the same - filtering by terms
 
 Future to do:
     - Re-think how feeding in baseurls, maybe there is a more flexible way and would be better for long term stability
-    - Check out servers and how will transfer over
-    - Set up script to work every day
     - Options for saving to a data base and what would be the best path
     - Once decided - start process of processing text data for injest - maybe should start injest immediately with the raw stories so that processing works from that
     - Once completed - join the process of scraping and data processing + do look back processing
@@ -51,11 +51,3 @@ TO DO:
 - Analyse logs for:
     - Repeated deletions
     - Errors in scraping (from issue)
-
-FEATURE CHANGE:
-    - Modify loading of base urls to allow for a single one, making error replication easier
-
-ISSUES:
-    - Iteration error for second skysports - seems that summaries is not caught up with the titles
-    - I think, either way, should add in a TRY for each source, so that a single error doesn't disrupt everything
-    - I think also adding in a TRY to the overall script to catch errors could be good

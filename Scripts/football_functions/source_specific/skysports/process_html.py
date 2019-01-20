@@ -64,7 +64,7 @@ def extract_headlines(html_content, modifier, logger):
         if article_summaries[i]:
             article_summaries[i] = article_summaries[i].strip()
 
-        if article_links[i] != '' and '://www' not in article_links[i]:
+        if article_links[i] != '' and 'http://' not in article_links[i] and 'https://' not in article_links[i]:
             article_links[i] = 'http://www.skysports.com' + article_links[i]
 
         article_info = {
