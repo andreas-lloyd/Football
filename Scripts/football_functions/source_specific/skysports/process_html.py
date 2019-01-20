@@ -29,16 +29,19 @@ def extract_headlines(html_content, modifier, logger):
         article_dates = ['']*len(article_titles)
         
     else:
+        # Declare an extra condition because sometimes it would link to a generic article that caused bugs
+        extra_condition = './div[@class = "figure span1/3 -spr0-5"]/a/@href = "http://www.skysports.com/transfer-centre"'
+
         # Note that there is a "show more" section that cannot load HTML for and three different types of article in general
         transfer_headlines = sel.xpath('//div[@class = "box media -vertical -bp20-horizontal"]')
-        transfer_sublines = sel.xpath('//div[@class = "box media -bp30-vertical"]')
+        transfer_sublines = sel.xpath('//div[@class = "box media -bp30-vertical" and not({})]'.format(extra_condition))
         transfer_sublinks = sel.xpath('//ul[@class = "list -bullet text-s"]')
         
         # For main headlines
         article_titles = transfer_headlines.xpath('.//a[@class = "-a-block -clear"]/h2/text()').extract()
         article_links = transfer_headlines.xpath('.//a[@class = "-a-block -clear"]/@href').extract()
         article_summaries = transfer_headlines.xpath('.//a[@class = "-a-block -clear"]/p/text()').extract()
-        article_images = transfer_headlines.xpath('.//img/@data-src').re('(\/[^\./]*\.[A-z]*|#)') # Found one with a ? in the middle
+        article_images = transfer_headlines.xpath('.//img/@data-src').re('[^\/](\/[^\./]*\.[A-z]*|#)') # Found one with a ? in the middle - first [] removes things after ://
         article_dates = ['']*len(article_titles)
         
         # For subheadlines

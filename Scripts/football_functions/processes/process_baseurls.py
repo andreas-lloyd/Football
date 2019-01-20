@@ -61,7 +61,7 @@ def full_process(baseurl_loc, proxy, logger, save_path, date_today):
                 story_path = save_path / domain / date_today
                 story_file = story_path / json_name
                 
-                if is_duplicate or story_file.exists():
+                if is_duplicate or (story_file.exists() and 'fake_link' not in json_name):
                     logger.warning('Have found a duplicate link for file named {}'.format(json_name))
                     continue
                 

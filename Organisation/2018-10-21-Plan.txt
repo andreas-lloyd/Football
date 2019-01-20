@@ -51,3 +51,11 @@ TO DO:
 - Analyse logs for:
     - Repeated deletions
     - Errors in scraping (from issue)
+
+FEATURE CHANGE:
+    - Modify loading of base urls to allow for a single one, making error replication easier
+
+ISSUES:
+    - Iteration error for second skysports - seems that summaries is not caught up with the titles
+    - I think, either way, should add in a TRY for each source, so that a single error doesn't disrupt everything
+    - I think also adding in a TRY to the overall script to catch errors could be good
