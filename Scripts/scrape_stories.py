@@ -8,13 +8,13 @@ import datetime
 from football_functions.generic import default_logger
 from football_functions.processes import process_baseurls as pb
 
-def scrape_stories(HOME_PATH, baseurl_loc):
+def scrape_stories(HOME_PATH, baseurl_loc, data_name):
     """
     Define a main for execution where we define some stuff
     """
 
     # Define folder locations
-    data_loc = HOME_PATH / 'Data'
+    data_loc = HOME_PATH / data_name
     story_loc = data_loc / 'Stories'
     log_loc = data_loc / 'Logs'
 
@@ -33,6 +33,7 @@ def scrape_stories(HOME_PATH, baseurl_loc):
 if __name__ == '__main__':
     HOME_PATH = Path(sys.argv[1])
     baseurl_loc = Path(sys.argv[2])
-    scrape_stories(HOME_PATH, baseurl_loc)
+    data_name = Path(sys.argv[3])
+    scrape_stories(HOME_PATH, baseurl_loc, data_name)
 
     
