@@ -17,6 +17,10 @@ Immediate to do:
     - ISSUE:
         - Have found that some team pages are not scraping because the domain name isn't saving (e.g. url = /sport/teams/barcelona)
 
+    URGENT:
+        - String operation on posix path
+        - NEED to do something to make immediately obvious that there is a big problem - i.e. error on exit
+
 Medium term improvements:
 - Improve print statements to get some feedback on what is going on as running
 - Script that analyses the log and reports progress

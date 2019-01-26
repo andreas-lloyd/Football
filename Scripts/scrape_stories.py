@@ -34,6 +34,14 @@ if __name__ == '__main__':
     HOME_PATH = Path(sys.argv[1])
     baseurl_loc = Path(sys.argv[2])
     data_name = Path(sys.argv[3])
-    scrape_stories(HOME_PATH, baseurl_loc, data_name)
+
+    try:
+        scrape_stories(HOME_PATH, baseurl_loc, data_name)
+    except (KeyboardInterrupt, SystemExit):
+        raise
+    except Exception as error:
+        with open('~/fatal_error.txt', 'w') as error_file:
+            error_file.write('Fatal error encountered, printing error string below:\n\n')
+            error_file.write(error)
 
     

@@ -13,12 +13,12 @@ def full_process(baseurl_loc, proxy, logger, save_path, date_today):
     logger.info('Loading in the base URLs...')
     baseurl_list = []
 
-    if 'http' not in baseurl_loc:
+    if 'http' not in str(baseurl_loc):
         with baseurl_loc.open(mode = 'r') as list_file:
             for url in list_file.readlines():
                 baseurl_list.append(url.rstrip())
     else:
-        baseurl_list = list(baseurl_loc)
+        baseurl_list = [str(baseurl_loc)]
             
     logger.info('Have found {}'.format(len(baseurl_list)))
         
