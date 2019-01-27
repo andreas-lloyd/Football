@@ -19,7 +19,8 @@ Immediate to do:
 
     URGENT:
         - String operation on posix path
-        - NEED to do something to make immediately obvious that there is a big problem - i.e. error on exit
+        - NEED to do something to make immediately obvious that there is a big problem - i.e. error on exit  >>> ADD DATE TO IT
+        >> KEYBOARD INTERRUPT NOT WORKING
 
 Medium term improvements:
 - Improve print statements to get some feedback on what is going on as running

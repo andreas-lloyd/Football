@@ -104,15 +104,20 @@ def full_process(baseurl_loc, proxy, logger, save_path, date_today):
                             
                             with story_file.open(mode = 'w') as json_file:
                                 json.dump(headline, json_file, indent = 4)
-
+                        
+                        except (KeyboardInterrupt, SystemExit):
+                            raise
                         except:
                             logger.error('An error has occurred in headline with link {}:\n'.format(headline['article_link']))
                             logger.error(error)
-
+                except (KeyboardInterrupt, SystemExit):
+                    raise
                 except Exception as error:
                     logger.error('An error has occurred in suburl {}:\n'.format(sub_url))
                     logger.error(error)
 
+        except (KeyboardInterrupt, SystemExit):
+            raise
         except Exception as error:
             logger.error('An error has occurred in baseurl {}:\n'.format(base_url))
             logger.error(error)
