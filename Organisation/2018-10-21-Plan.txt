@@ -22,6 +22,9 @@ Immediate to do:
         - NEED to do something to make immediately obvious that there is a big problem - i.e. error on exit  >>> ADD DATE TO IT
         >> KEYBOARD INTERRUPT NOT WORKING
 
+    I'm not sure if saving directly to buckets is worth it, because it is taking an unreasonably long time to do anything
+        Don't know if this is due to anything specific, or just really slow working over internet
+
 Medium term improvements:
 - Improve print statements to get some feedback on what is going on as running
 - Script that analyses the log and reports progress
@@ -51,6 +54,10 @@ Server notes:
 
 2018-12-08 Report:
 - Progressing OK - downloaded all logs
+
+2019-01-27
+- Considering stopping saving directly to buckets and doing a CP over to buckets every month or something, as it looks to be progressing extremely slowly
+- I think should try and come back to this at a later point when sure that the process is solid
 
 TO DO:
 - Analyse logs for:

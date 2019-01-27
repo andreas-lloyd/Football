@@ -8,7 +8,7 @@ import datetime
 from football_functions.generic import default_logger
 from football_functions.processes import process_baseurls as pb
 
-def scrape_stories(HOME_PATH, baseurl_loc, data_name):
+def scrape_stories(HOME_PATH, baseurl_loc, data_name, date_today):
     """
     Define a main for execution where we define some stuff
     """
@@ -21,9 +21,6 @@ def scrape_stories(HOME_PATH, baseurl_loc, data_name):
     # For now no proxy
     proxy = None
 
-    # Set up a date for saving - fix so that save in subdirectories
-    date_today = datetime.datetime.today().strftime('%Y/%m/%d')
-
     # And a logger
     process_logger = default_logger.get_logger(log_loc, date_today, 'full_process')
 
@@ -35,13 +32,18 @@ if __name__ == '__main__':
     baseurl_loc = Path(sys.argv[2])
     data_name = Path(sys.argv[3])
 
+    # Set up a date for saving - fix so that save in subdirectories
+    date_today = datetime.datetime.today().strftime('%Y/%m/%d')
+
     try:
-        scrape_stories(HOME_PATH, baseurl_loc, data_name)
+        scrape_stories(HOME_PATH, baseurl_loc, data_name, date_today)
     except (KeyboardInterrupt, SystemExit):
         raise
     except Exception as error:
-        with open('~/fatal_error.txt', 'w') as error_file:
-            error_file.write('Fatal error encountered, printing error string below:\n\n')
+        with open('~/fatal_error_{}.txt'.format(date_today), 'w') as error_file:
+            error_file.write('Fatal error encountered, printing error below:\n\n')
             error_file.write(error)
+
+        raise
 
     
