@@ -1,6 +1,11 @@
 Status:
     - The full process seems complete, with a de-duplication part included
     - Nothing is parallelised or anything like that, but I think that is a long way off
+Next tasks:
+- Script to move files into cloud
+    - I guess it should look at which files are already there and then move those that are not
+    - Do every few days I guess
+- Script to summarise logs
 
 Immediate to do:
     - Check that de-duplication is working properly - especially for links that may not change name but update internally
@@ -24,6 +29,9 @@ Immediate to do:
 
     I'm not sure if saving directly to buckets is worth it, because it is taking an unreasonably long time to do anything
         Don't know if this is due to anything specific, or just really slow working over internet
+
+    Minor change:
+        - Adjust level of somet stuff, loads of errors marked as errors
 
 Medium term improvements:
 - Improve print statements to get some feedback on what is going on as running
@@ -58,6 +66,10 @@ Server notes:
 2019-01-27
 - Considering stopping saving directly to buckets and doing a CP over to buckets every month or something, as it looks to be progressing extremely slowly
 - I think should try and come back to this at a later point when sure that the process is solid
+- Could make a process to tar the jsons and copy over every now and again
+- Could also save the log report there
+- CLEARLY see that logging doesn't work well, for example > maybe just generally more stable to do everything locally, and then later compress everything and send over
+- This could be done in the same script just executing shell commands to tar and copy (cannot move or would pull duplicates)
 
 TO DO:
 - Analyse logs for:
