@@ -38,10 +38,11 @@ def check_duplicates(article_link, domain_path, search_list):
     # Now want to build up this list of things we have searched - only build if we are given a blank
     if len(search_list) == 0:
         to_search = domain_path.glob('*/*/*/*.json')
-        try:
-            [search_list.append(search.stem) if 'all_stories.json' not in search else search_list.extend(find_articles(search)) for search in to_search]
-        except:
-            print('Issue is here')
+        for search in to_search:
+            if 'all_stories.json' not in str(search):
+                search_list.append(search.stem)
+            else:
+                search_list.extend(find_articles(search))
 
     # Now we can just check this list and return stfuff
     if 'fake_link' not in article_name:
