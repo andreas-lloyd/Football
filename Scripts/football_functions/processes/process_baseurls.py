@@ -112,7 +112,7 @@ def full_process(baseurl_loc, proxy, logger, save_path, date_today):
                         
                         except (KeyboardInterrupt, SystemExit):
                             raise
-                        except:
+                        except Exception as error:
                             logger.error('HEADLINE    An error has occurred in headline with link {}:\n'.format(headline['article_link']))
                             logger.error(error)
 

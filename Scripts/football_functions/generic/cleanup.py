@@ -36,4 +36,5 @@ def move_files(date_today, data_name, bucket_name, logger, log_loc = None, story
         copy_files(log_loc, data_name, bucket_name, date_yesterday, logger)
 
     if story_loc:
-        copy_files(story_loc, data_name, bucket_name, date_yesterday, logger)
+        for domain_loc in story_loc.iterdir():
+            copy_files(domain_loc, data_name, bucket_name, date_yesterday, logger)
