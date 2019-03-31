@@ -29,7 +29,8 @@ def scrape_stories(HOME_PATH, baseurl_loc, data_name, bucket_name, date_today):
     pb.full_process(baseurl_loc, proxy, process_logger, story_loc, date_today.strftime('%Y/%m/%d'))
 
     # After finished, start the loop that copys stuff over
-    cleanup.move_files(date_today, data_name, bucket_name, process_logger, log_loc, story_loc)
+    if False:
+        cleanup.move_files(date_today, data_name, bucket_name, process_logger, log_loc, story_loc)
 
 if __name__ == '__main__':
     HOME_PATH = Path(sys.argv[1])

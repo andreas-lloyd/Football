@@ -1,19 +1,28 @@
-import re
+"""
+2019-03-31: change - as moving to save all in one, need to make this check some global list for things that we have already done
 
-def check_duplicates(article_link, domain_path):
+Think will make this script build up a log that is only run once for each execution (will have to be careful in multiprocess - or can do once for each domain)
+and then check that list - will avoid having to update something
+
+Will also make it look back at regular files to build this list, just to have backwards compatibility
+"""
+
+import re
+import json
+
+def find_articles(search):
     """
-    Function for checking for duplicates and stopping us processing the same stories over and over
-    Due to the way we are saving - this can only really be done for the headlines, but
-    we can do it easily by checking those previous files with similar file names and then loading them in
-    if the URL is exactly the same, then we won't pull it
-    
-    This is important to do BEFORE we move to scrape the HTML, as this is the process that really takes longest
-    
-    1. Get the file extension
-    2. Check for the same extension else where
-    3. Since the file name is purely from the URL, we exit saying they are the same
-    
-    I think this is OK to do, as scraping is really what takes time, and we really do have to scrape the suburl HTML
+    Small wrapper to get the names of all articles from link
+    """
+    with search.open() as json_file:
+        return json.load(json_file)['names']
+
+def check_duplicates(article_link, domain_path, search_list):
+    """
+    Function for checking if we have seen the file before - we do this by checking
+    a search list that is built up if an empty list is given to it
+
+    This should be called for each article, but we can skip the process of the search list by feeding it back in
     """
     # Start building the file name out of the link, checking that everything is valid         
     url_reg = re.search('\/([^\/][^www].*)', article_link)
@@ -24,13 +33,15 @@ def check_duplicates(article_link, domain_path):
     else:
         url_extension = re.sub('[^A-z0-9]', '_', article_link)
 
-    json_name = re.sub('[^A-z0-9_]+', '', url_extension) + '.json'
-    
-    # We can use a glob to check for all the files of any pattern under our domain - note that will return False for all fake_links
-    if 'fake_link' not in article_link:
-        all_matches = list(domain_path.glob('*/*/*/{}'.format(json_name)))
-    else:
-        all_matches = []
+    article_name = re.sub('[^A-z0-9_]+', '', url_extension)
 
-    # If the length is not 0, then we have a duplicate
-    return len(all_matches) != 0, json_name
+    # Now want to build up this list of things we have searched - only build if we are given a blank
+    if len(search_list) == 0:
+        to_search = domain_path.glob('*/*/*/*.json')
+        [search_list.append(search.stem()) if 'all_stories.json' not in search else search_list.extend(find_articles(search)) for search in to_search]
+
+    # Now we can just check this list and return stfuff
+    if 'fake_link' not in article_name:
+        return article_name in search_list, article_name, search_list
+    else:
+        return False, article_name, search_list

@@ -15,23 +15,12 @@ Immediate to do:
 
     - Consider also getting the title from the story > when scraping gossip, we get titles that are just the names, but later the actual title is quite different
 
-    - Something that looks at the logs and summarises the progress
-        - number of errors + printing uniques and counts + percentage of domain
-        - number of duplicates + percentage of domain
 
     - ISSUE:
         - Have found that some team pages are not scraping because the domain name isn't saving (e.g. url = /sport/teams/barcelona)
 
-    URGENT:
-        - String operation on posix path
-        - NEED to do something to make immediately obvious that there is a big problem - i.e. error on exit  >>> ADD DATE TO IT
-        >> KEYBOARD INTERRUPT NOT WORKING
-
-    I'm not sure if saving directly to buckets is worth it, because it is taking an unreasonably long time to do anything
-        Don't know if this is due to anything specific, or just really slow working over internet
-
     Minor change:
-        - Adjust level of somet stuff, loads of errors marked as errors
+        - Maybe consider adding source to each message too
 
 Medium term improvements:
 - Improve print statements to get some feedback on what is going on as running
@@ -70,6 +59,12 @@ Server notes:
 - Could also save the log report there
 - CLEARLY see that logging doesn't work well, for example > maybe just generally more stable to do everything locally, and then later compress everything and send over
 - This could be done in the same script just executing shell commands to tar and copy (cannot move or would pull duplicates)
+
+2019-03-31
+- Think will make a script to make a CSV by running over the data locations so that we can download
+- I think this will let us be a bit more agile than the buckets thing for now
+- THOUGHTS:
+    - Maybe instead of saving jsons individually, should be adding to a file and then saving all in that file (i.e. to have a single file instead of many) - and then we can compress that
 
 TO DO:
 - Analyse logs for:

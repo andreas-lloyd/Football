@@ -33,7 +33,7 @@ def find_suburls(baseurl_html, base_url, domain, logger):
         links = [base_url]
     
     if len(links) == 0:
-        logger.warning('Have found {} links from {}'.format(len(links), domain))
+        logger.warning('SUBURL    Have found {} links from {}'.format(len(links), domain))
     
     return links
 

@@ -6,19 +6,21 @@ def copy_files(loc, data_name, bucket_name, date_yesterday, logger):
     """
     Small wrapper to just abstract some repetitive processes
     Not sure if should add in a part to zip up the jsons - maybe not really necessary
+
+    CHANGE NEEDED - i guess need to loop over sources
     """
     # First build up the locations
-    local_path = Path(log_loc) / date_yesterday.strftime('%Y/%m/%d')
-    bucket_path = Path(log_loc.replace(data_name, bucket_name)) / date_yesterday.strftime('%Y/%m/%d')
+    local_path = Path(loc) / date_yesterday.strftime('%Y/%m/%d')
+    bucket_path = Path(loc.replace(data_name, bucket_name)) / date_yesterday.strftime('%Y/%m/%d')
     
     # Check that the file we are working with exists, and copy over whole directory
-    logger.info('Looking in {}'.format(local_path))
+    logger.info('CLEANUP    Looking in {}'.format(local_path))
     if local_path.exists():
-        logger.info('Exists! Copying...')
+        logger.info('CLEANUP   Exists! Copying...')
         command = 'mkdir -p {} && cp -r {}/. {}'.format(bucket_path, local_path, bucket_path)
         subprocess.run(command, shell = True)
     else:
-        logger.warning('Path not found')
+        logger.error('CLEANUP   Path not found')
 
 def move_files(date_today, data_name, bucket_name, logger, log_loc = None, story_loc = None, zip_stories = False):
     """
@@ -34,4 +36,4 @@ def move_files(date_today, data_name, bucket_name, logger, log_loc = None, story
         copy_files(log_loc, data_name, bucket_name, date_yesterday, logger)
 
     if story_loc:
-        copy_files(log_loc, data_name, bucket_name, date_yesterday, logger)
+        copy_files(story_loc, data_name, bucket_name, date_yesterday, logger)

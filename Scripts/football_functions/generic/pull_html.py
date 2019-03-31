@@ -14,16 +14,16 @@ def request_html(url, proxy, logger):
         
         # If we 404 then we have connected well
         if response.status_code == 404:
-            logger.error('404 Error')
+            logger.error('REQUEST    404 Error')
             return (url, '404 error')
         else:
             html_text = response.text
-            logger.debug('Successfully pulled HTML from {}'.format(url))
+            logger.debug('REQUEST    Successfully pulled HTML from {}'.format(url))
             return (html_text, 'No error')
     except requests.exceptions.RequestException as error:
         # The link timed out
-        logger.warning('Have not managed to pull from {} due to a {}'.format(url, error))
-        logger.debug('Sleeping for 5 seconds to see if works again')
+        logger.warning('REQUEST    Have not managed to pull from {} due to a {}'.format(url, error))
+        logger.debug('REQUEST    Sleeping for 5 seconds to see if works again')
         time.sleep(5)
         
         # Try again after sleeping for 5 seconds in case we were rejected
@@ -31,14 +31,14 @@ def request_html(url, proxy, logger):
             response = requests.get(url, proxies = proxy)
             
             if response.status_code == 404:
-                logger.error('404 Error')
+                logger.error('REQUEST    404 Error')
                 return (url, '404 error')
             else:
                 html_text = response.text
-                logger.debug('Successfully pulled HTML from {}'.format(url))
+                logger.debug('REQUEST    uccessfully pulled HTML from {}'.format(url))
                 return (html_text, 'No error')
         except requests.exceptions.RequestException as error:
-            logger.error('Still not working')
+            logger.error('REQUEST    Still not working')
             return (url, error)
 
 def process_url(url, proxy, logger):
@@ -47,7 +47,7 @@ def process_url(url, proxy, logger):
     If valid, will proceed to scrape - so all scraping goes here
     Note that if we produce an error, will return the URL again
     """
-    logger.info('Scraping URL {}'.format(url))
+    logger.info('REQUEST    Scraping URL {}'.format(url))
     
     # First check if the think we are scraping is valid and remove any spaces
     valid_url = re.match('^http\S*www\.\S*$', url)
@@ -58,8 +58,8 @@ def process_url(url, proxy, logger):
         
         return request_html(valid_url.group(0).rstrip(), proxy, logger)
     elif 'fake_link' in url:
-        logger.warning('The link found is fake\n {}\n'.format(url))
+        logger.warning('REQUEST    The link found is fake: {}'.format(url))
         return (url, 'Fake link')
     else:
-        logger.warning('The link found is not valid\n {}\n'.format(url))
+        logger.warning('REQUEST    The link found is not valid: {}'.format(url))
         return (url, 'Invalid URL')
