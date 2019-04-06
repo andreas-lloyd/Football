@@ -74,7 +74,7 @@ def full_process(baseurl_loc, proxy, logger, save_path, date_today):
                             is_duplicate, article_name, search_list = cd.check_duplicates(headline['article_link'], save_path / domain, search_list)
                             
                             # Want to check if duplicate OR if we already added this one, to avoid scraping again
-                            if is_duplicate or (article_name not in headlines['names'] and 'fake_link' not in article_name):
+                            if is_duplicate or (article_name in headlines['names'] and 'fake_link' not in article_name):
                                 logger.warning('HEADLINE    Have found a duplicate link for file named {}'.format(article_name))
                                 continue
                             

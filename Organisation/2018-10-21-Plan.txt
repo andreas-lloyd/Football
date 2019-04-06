@@ -68,6 +68,8 @@ Server notes:
     -https://stackoverflow.com/questions/49534901/is-there-a-way-to-use-json-dump-with-gzip
     Not sure if should zip up first - might be useful to reduce space in general
 
+    CHECK IF TAGGING ALL IS DUPLICATE
+
 TO DO:
 - Analyse logs for:
     - Repeated deletions
