@@ -104,7 +104,7 @@ def full_process(baseurl_loc, proxy, logger, save_path, date_today):
                                 headline['story_keywords'] = ''
 
                             # And save result to list for saving later ut only if not already there
-                            if headline not in headlines:
+                            if headline not in headlines['stories']:
                                 headlines['stories'].append(headline)
                                 headlines['names'].append(article_name)
                             else:
