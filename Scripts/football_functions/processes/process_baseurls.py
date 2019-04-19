@@ -24,7 +24,10 @@ def full_process(baseurl_loc, proxy, logger, save_path, date_today):
         baseurl_list = [str(baseurl_loc)]
             
     logger.info('BASEURL    Have found {}'.format(len(baseurl_list)))
-        
+    
+    # Set up a save loc for the domain
+    domain_before = ''
+
     # We loop over the loaded in base urls
     print('Starting to process base urls')
     for base_url in baseurl_list:
@@ -47,9 +50,11 @@ def full_process(baseurl_loc, proxy, logger, save_path, date_today):
             logger.info('BASEURL    Finding the suburls')
             suburl_list = ps.find_suburls(baseurl_html[0], base_url, domain, logger)
 
-            # Init some lists so that we can save everything in the same place
-            headlines = {'stories' : [], 'names' : []}
-            search_list = []
+            # If our domain changes, then init new - if not, then don't
+            if domain != domain_before:
+                # Init some lists so that we can save everything in the same place
+                headlines = {'stories' : [], 'names' : []}
+                search_list = []
             
             # So we loop over the sub_urls that we found, pull the HTML and then pull out the headlines - second scrape
             for sub_url in suburl_list:
@@ -129,10 +134,12 @@ def full_process(baseurl_loc, proxy, logger, save_path, date_today):
             if not baseurl_path.exists():
                 baseurl_path.mkdir(parents = True)
 
-            # And save the file to json
+            # And save the file to json - note that if we didn't re-init we will overwrite with updated
             baseurl_file = baseurl_path / 'all_stories.json'
             with baseurl_file.open(mode = 'w') as json_file:
                 json.dump(headlines, json_file, indent = 4)
+
+            domain_before = domain
 
         except (KeyboardInterrupt, SystemExit):
             raise

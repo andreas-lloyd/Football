@@ -70,7 +70,16 @@ Server notes:
 
     CHECK IF TAGGING ALL IS DUPLICATE
 
+2019-04-19
+- Think will try and group everything into a CSV and save it in Cloud-data
+- Then start looking at process for processing stories, because wasting time not going for this
+
 TO DO:
 - Analyse logs for:
     - Repeated deletions
     - Errors in scraping (from issue)
+- Would be interesting to have tests, but not sure how to set up easily
+
+2019-04-08
+- Have found loads of errors for BBC with form Have found an error in the suburl HTML for /sport/football/teams/lyon > i.e. not got the website properly
+- Also Have found an error in the suburl HTML for http://www.dailymail.co.ukhttps://www.dailymail.co.uk/sport/teampages/brighton-and-hove-albion.html
