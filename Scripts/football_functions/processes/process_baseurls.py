@@ -108,6 +108,9 @@ def full_process(baseurl_loc, proxy, logger, save_path, date_today):
                                 headline['story_twitter'] = ''
                                 headline['story_keywords'] = ''
 
+                            # Add a scrape date
+                            headline['scrape_date'] = date_today
+
                             # And save result to list for saving later ut only if not already there
                             if headline not in headlines['stories']:
                                 headlines['stories'].append(headline)
