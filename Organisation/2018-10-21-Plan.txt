@@ -84,3 +84,10 @@ TO DO:
 2019-04-08
 - Have found loads of errors for BBC with form Have found an error in the suburl HTML for /sport/football/teams/lyon > i.e. not got the website properly
 - Also Have found an error in the suburl HTML for http://www.dailymail.co.ukhttps://www.dailymail.co.uk/sport/teampages/brighton-and-hove-albion.html
+
+
+Idea for progress:
+- I guess for now need some way of tagging quickly, which can just be scraping from online
+- For relation of team and players, maybe don't even need that - can just have a score that relates players / teams with others, so that if someone searches X, that is suggested (for recommender system)
+- So maybe for now pull some data from online and then try and set something up - maybe try training something as a result
+- Maybe going with an approach of using "probabilities" will be best - because won't have to mess with trying to get 'too much' data

@@ -1,0 +1,30 @@
+Scraping issues:
+- Fake link issue:
+    - a set of the fake link articles are saving loads of "What the bookies say -", that don't have any additional info or anything
+    - Need to check that everything is ok
+    - Found several examples similar in fake link
+- Boring links
+    - Who was your man of the match?
+- Team of the week
+    - Could be interesting to include, but not really working well as of how it is now, probably because looking at transfer links
+    
+
+Processing issues:
+- Multiple stories
+    - Clearly have some things that contain multiple stories, certain types of links that summarise weekend news
+    - Maybe have to keep a log of the types of articles that contain multiple - otherwise could maybe split into sentences?
+    - Will have to be careful with these and not use in initial phase of reduced titles
+    
+Concepts:
+- If a story is not really about a specific thing, is it interesting?
+
+Correcting entities:
+- Have to decide if player / manager / owner etc - probably better to just identify person and later correct
+- Have to also think about how cities are handled (e.g. London's teams) > have to associate some how
+- What about derbies? e.g. Old Firm derby - might be useful to identify too
+- Something like VAR could be identified too - but maybe more to do with match events and could be a later stage thing
+- Will try to observe if the capitals part is dealt with
+- I think using look ups could be quite effective - as we could scrape from Wikipedia and use certain key things (e.g. Euro 2020)
+
+Tagging:
+- Have seen that there are some stories that take a specific format - could use that to identify teams / players
