@@ -1,0 +1,47 @@
+What we have so far:
+- Articles properly downloaded etc.
+- Some really basic NER that just uses capital letters
+
+What we want to do (long term):
+- Be able to query articles in some structured way
+- In this way, reccommend and build analytics around these articles
+
+What we want to do (short term):
+- Tag articles in some structured way so that we can create a database
+    - What the article is about - general category
+    - Who are the principal entities
+
+What we need:
+- Have the entities - but don't know what sort they are (is this important?)
+    - We could do some sort of look up online, which I guess works for football because they are important / popular / written about
+        - Maybe we could just search it on wikipedia and get the most important thing that comes up
+        - Or on DBpedia
+        - I guess not really interested in who it is, just what sort of thing it is (lends itself more to graph)
+    - If we had another problem then we could use graph theory and find certain relationships and realise who is who
+    - Another issue is that we would like to unify things - which might translate better to look ups? or graph theory and then reduce when things are very similar
+    - For graph, could insert people into that community 
+
+
+Maybe the best approach would be to download some dataset with teams and player names + managers and then match against that? This would at least be OK for marking what sort of entity it is
+- I think marking the entity type and unifying are the next steps
+- Because once that is done, creating relations is the next step
+- Maybe first would be to mark off and then NEXT we could unify
+
+
+
+
+Plan:
+- Should have separate data pipelines - one for the raw data extraction (the basic scraping) and one for the treatment of this 
+- This would be sort of like a layer 1 / layer 2 type set up
+- Then the treatment for the layer 1 > 2 is what we are doing now, where we want to extract the entities and treat them in some way
+- Maybe the actual treatment of the entities should be part of a process of 2 > 3
+
+Need something that converts some of the entities to a more normalised form
+- Can easily do some of this with a file - for easy nickname conversion
+- Some other nicknames are a bit harder to do - e.g. United - but maybe we could have a process that compares those links to existing candidates
+
+To do:
+- Finish the wikipedia look up and json saving
+- And then process the entities using this loop
+- Then build a more proper pipeline where we can save the entities and their types etc.
+- And then start thinking about pushing stuff to a datebase

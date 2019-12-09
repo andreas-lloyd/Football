@@ -1,0 +1,20 @@
+Connected Components:
+
+- We could say that each entity is a node
+- Then we could say that the edge is being in the same article, and the strength is simply the count
+- In this way we could find clusters and assign those clusters IDs
+- We could also detect new connections and use those as alerts for potential developments
+
+Page rank:
+
+- See where the most important connections for clusters are and use as feature?
+- Could also use it to define what sort of relation exists
+
+Centrality:
+
+- Recommendations could start on path going down to different clusters - then we typically start asking about things WITHIN that cluster, but otherwise we could also suggest some general articles from others
+    - Sort of like > more general popular, generic articles if cluster is not main cluster, and if main, then more specific
+- This is essentially a sort of community detection
+
+
+Edge types can be article types
